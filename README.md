@@ -1,0 +1,2 @@
+# ShopIQ
+Shopping Recommendation System
