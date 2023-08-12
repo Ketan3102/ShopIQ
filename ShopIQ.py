@@ -28,7 +28,6 @@ def recomm_model():
     model.add(GlobalAveragePooling2D())
     return model
 
-@st.cache_resource
 def recommendation_emb(img,model):
     img_array=image.img_to_array(img)
     expanded_img=np.expand_dims(img_array,axis=0)
@@ -44,6 +43,7 @@ def main():
     col_upload,col_dropdown=st.columns(2)
     with col_upload:
         data=st.file_uploader("Insert Your Image")
+    display_img=None
     if data:
         embeddings,image_paths=path_embeddings()
         model=recomm_model()
