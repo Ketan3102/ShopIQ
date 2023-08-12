@@ -12,7 +12,7 @@ from numpy.linalg import norm
 from PIL import Image, ImageOps
 import streamlit as st
 
-@st.cache_resources
+@st.cache_resource
 def path_embeddings():
     embeddings_url = 'https://media.githubusercontent.com/media/Ketan3102/ShopIQ/main/embeddings.pkl'
     image_paths_url = 'https://media.githubusercontent.com/media/Ketan3102/ShopIQ/main/image_paths.pkl'
@@ -20,7 +20,7 @@ def path_embeddings():
     image_paths = pickle.loads(requests.get(image_paths_url).content)
     return embeddings, image_paths
 
-@st.cache_resources
+@st.cache_resource
 def recomm_model():
     model=ResNet50(weights='imagenet',include_top=False, input_shape=(224,224,3))
     model.trainable=False
@@ -28,7 +28,7 @@ def recomm_model():
     model.add(GlobalAveragePooling2D())
     return model
 
-@st.cache_resources
+@st.cache_resource
 def recommendation_emb(img,model):
     img_array=image.img_to_array(img)
     expanded_img=np.expand_dims(img_array,axis=0)
